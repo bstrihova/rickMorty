@@ -12,6 +12,10 @@ Running on `vite`.
 
 ## Demo
 https://rick-morty-bstrihova.netlify.app/
+<img width="1440" alt="Screenshot 2023-01-12 at 13 49 17" src="https://user-images.githubusercontent.com/47380995/212071042-a8322a64-445e-4ba8-8060-a7bb55a1643d.png">
 
 ## Log in
 You can use any email and any password to log in.
+
+
+
