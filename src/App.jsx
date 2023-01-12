@@ -1,34 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import React, { useEffect, useState, Fragment } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from './containers/Layout';
+import Home from './containers/Home';
+import Character from './containers/Character';
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [pageLoaded, setPageLoaded] = useState(false);
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    useEffect(() => {
+        setLoggedIn(localStorage.hasOwnProperty('token-info'));
+        setPageLoaded(true);
+    }, []);
+
+    return (
+        <Router>
+            <Layout loggedIn={loggedIn} setLoggedIn={setLoggedIn}>
+                {/* A <Routes> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+                <Routes>
+                    {pageLoaded && (
+                        <Fragment>
+                            <Route
+                                exact
+                                path="/character/:characterId"
+                                element={<Character loggedIn={loggedIn} />}
+                            />
+                            <Route
+                                path="/"
+                                element={
+                                    <Home
+                                        setLoggedIn={setLoggedIn}
+                                        loggedIn={loggedIn}
+                                    />
+                                }
+                            />
+                            <Route
+                                path="*"
+                                element={<p>There's nothing here: 404!</p>}
+                            />
+                        </Fragment>
+                    )}
+                </Routes>
+            </Layout>
+        </Router>
+    );
 }
 
-export default App
+export default App;
