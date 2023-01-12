@@ -8,6 +8,10 @@ Rick &amp; Morty catalogue page written in `React.js` includes some nice FE feat
 - log-in log-out functionality using localStorage
 - responsivity - works well on desktops, phones & tablets
 
-You can use any email and any password to log in.
-
 Running on `vite`.
+
+## Demo
+https://rick-morty-bstrihova.netlify.app/
+
+## Log in
+You can use any email and any password to log in.
